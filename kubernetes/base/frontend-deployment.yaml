@@ -1,5 +1,6 @@
 apiVersion: apps/v1
 kind: Deployment
+
 metadata:
   name: frontend
   namespace: enterprise-devsecops
@@ -51,3 +52,17 @@ spec:
               port: 80
             initialDelaySeconds: 20
             periodSeconds: 20
+
+          volumeMounts:
+            - name: nginx-cache
+              mountPath: /var/cache/nginx
+
+            - name: nginx-run
+              mountPath: /var/run
+
+      volumes:
+        - name: nginx-cache
+          emptyDir: {}
+
+        - name: nginx-run
+          emptyDir: {}
