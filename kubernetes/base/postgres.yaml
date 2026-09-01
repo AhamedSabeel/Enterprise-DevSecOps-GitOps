@@ -32,17 +32,14 @@ spec:
         app: postgres
 
     spec:
-      securityContext:
-        runAsNonRoot: true
-        fsGroup: 999
-
       containers:
         - name: postgres
           image: postgres:16-alpine
+          imagePullPolicy: IfNotPresent
 
           securityContext:
             allowPrivilegeEscalation: false
-            readOnlyRootFilesystem: true
+            readOnlyRootFilesystem: false
             capabilities:
               drop:
                 - ALL
